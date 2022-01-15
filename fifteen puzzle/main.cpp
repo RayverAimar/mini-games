@@ -34,6 +34,7 @@ Point2D::~Point2D(){
 
 bool Point2D::move_x(bool mov){
     int back_up = m_x;
+    cout<<back_up<<endl;
     if(mov) m_x++;
     else m_x--;
     if(m_x < 0 && m_x > 3) m_x = back_up; return false;
@@ -149,17 +150,16 @@ void Board::printBoard(){
 
 void Board::update(){
     int cur_x = player->pos->getX(), cur_y = player->pos->getY();
-    board[cache[0]][cache[1]] = board[cur_x][cur_y];
-    board[cur_x][cur_y] = player->getAvatar();
+    board[cache[1]][cache[0]] = board[cur_y][cur_x];
+    board[cur_y][cur_x] = player->getAvatar();
 }
 int main(){
+
     Board board;
-    board.printBoard();
     while(true){
         system("cls");
         board.movement();
         board.update();
         board.printBoard();
     }
-    
 }
