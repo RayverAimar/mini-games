@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 
 using namespace std;
 
@@ -17,8 +18,8 @@ class Point2D{
     ~Point2D();
 
     //Setters
-    void move_x(bool mov); //mov = 1, move forward
-    void move_y(bool mov); //mov = 0, move back
+    bool move_x(bool mov); //mov = 1, move forward
+    bool move_y(bool mov); //mov = 0, move back
     int getX();
     int getY();
     void print_values(){ cout<<m_x<<endl<<m_y<<endl;}
@@ -31,33 +32,36 @@ Point2D::~Point2D(){
 
 }
 
-void Point2D::move_x(bool mov){
+bool Point2D::move_x(bool mov){
     int back_up = m_x;
     if(mov) m_x++;
     else m_x--;
-    if(m_x < 0 && m_x > 3) m_x = back_up;
+    if(m_x < 0 && m_x > 3) m_x = back_up; return false;
+    return true;
 }
-void Point2D::move_y(bool mov){
+bool Point2D::move_y(bool mov){
     int back_up = m_y;
     if(mov) m_y++;
     else m_y--;
-    if(m_y < 0 && m_y > 3) m_y = back_up;
+    if(m_y < 0 && m_y > 3) m_y = back_up; return false; // NO hubo movimiento
+    return true; // Sí lo hubo
 }
 
 int Point2D::getX(){ return m_x; }
 
 int Point2D::getY(){ return m_y; }
 
-class Player{
+class Player{ 
     int m_avatar;
     public:
     Player();
     ~Player();
+    Point2D *pos;
     int getAvatar();
 };
 
 Player::Player(){
-    Point2D pos(3,3);
+    pos = new Point2D(3,3);
     m_avatar = 0;
 }
 
@@ -68,6 +72,8 @@ Player::~Player(){
 int Player::getAvatar(){ return m_avatar; }
 
 class Board{
+    Player *player;
+    int *cache;
     int board[4][4];
 
     public:
@@ -76,10 +82,15 @@ class Board{
     ~Board();
 
     void printBoard();
+    bool movement();
     void update();
 };
 
 Board::Board(){
+    player = new Player();
+    cache = new int[2];
+    cache[0] = player->pos->getX();
+    cache[1] = player->pos->getY();
     int aux = 1;
     for(int i = 0; i < 4; i++ ){
         for (int j = 0; j < 4; j++){
@@ -92,11 +103,31 @@ Board::Board(){
 }
 
 Board::~Board(){
-    
+
 }
 
-void Board::update(){
+bool Board::movement(){
+    char key;
 
+    cache[0] = player->pos->getX();
+    cache[1] = player->pos->getY();
+
+    if(_kbhit()){
+        key = _getch();
+    
+    if( key == UP) 
+        return player->pos->move_y( 0 );
+    }
+    if (key == DOWN){
+        return player->pos->move_y( 1 );
+    }
+    if( key == LEFT) {
+        return player->pos->move_x( 0 );
+    }
+    if (key == RIGHT){
+        return player->pos->move_x( 1 );
+    }
+    return false;
 }
 
 
@@ -116,7 +147,19 @@ void Board::printBoard(){
     }
 }
 
+void Board::update(){
+    int cur_x = player->pos->getX(), cur_y = player->pos->getY();
+    board[cache[0]][cache[1]] = board[cur_x][cur_y];
+    board[cur_x][cur_y] = player->getAvatar();
+}
 int main(){
     Board board;
     board.printBoard();
+    while(true){
+        system("cls");
+        board.movement();
+        board.update();
+        board.printBoard();
+    }
+    
 }
