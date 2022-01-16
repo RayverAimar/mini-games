@@ -113,10 +113,9 @@ bool Board::movement(){
     cache[0] = player->pos->getX();
     cache[1] = player->pos->getY();
 
-    if(_kbhit()){
-        key = _getch();
+    key = _getch();
     
-    if( key == UP) 
+    if( key == UP) {
         return player->pos->move_y( 0 );
     }
     if (key == DOWN){
@@ -156,9 +155,11 @@ void Board::update(){
 int main(){
 
     Board board;
+    board.printBoard();
+    
     while(true){
-        system("cls");
         board.movement();
+        system("cls");
         board.update();
         board.printBoard();
     }
