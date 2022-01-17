@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <conio.h>
 
 using namespace std;
@@ -57,37 +58,38 @@ int Point2D::getX(){ return m_x; }
 int Point2D::getY(){ return m_y; }
 
 class Player{ 
-    int m_avatar;
+    string m_avatar;
     public:
     Player();
     ~Player();
     Point2D *pos;
-    int getAvatar();
+    string getAvatar();
 };
 
 Player::Player(){
     pos = new Point2D(3,3);
-    m_avatar = 0;
+    m_avatar = "  ";
 }
 
 Player::~Player(){
 
 }
 
-int Player::getAvatar(){ return m_avatar; }
+string Player::getAvatar(){ return m_avatar; }
 
 class Board{
     Player *player;
     int *cache;
-    int board[4][4];
+    string board[4][4], solved[4][4];
 
     public:
 
     Board();
     ~Board();
 
-    void printBoard();
+    bool game_over();
     bool movement();
+    void printBoard();
     void update();
 };
 
@@ -99,16 +101,35 @@ Board::Board(){
     int aux = 1;
     for(int i = 0; i < 4; i++ ){
         for (int j = 0; j < 4; j++){
-            board[i][j] = aux;
+            if(aux < 10){
+                board[i][j] = "0" + to_string(aux);
+                solved[i][j] = "0" + to_string(aux);
+            }
+            else{
+                board[i][j] = to_string(aux);
+                solved[i][j] = to_string(aux);
+            }
             aux++;
         }
     }
-    board[3][3] = 0;
+    board[3][3] = player->getAvatar();
+    solved[3][3] = player->getAvatar();
 
 }
 
 Board::~Board(){
 
+}
+
+bool Board::game_over(){
+    for(int i = 0 ; i < 4; i++ ){
+        for(int j = 0; j < 4; j++){
+            if(!(board[i][j] == solved[i][j])){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 bool Board::movement(){
@@ -119,16 +140,16 @@ bool Board::movement(){
 
     key = _getch();  
     if( key == UP) {
-        return player->pos->move_y( 0 );
-    }
-    if (key == DOWN){
         return player->pos->move_y( 1 );
     }
+    if (key == DOWN){
+        return player->pos->move_y( 0 );
+    }
     if( key == LEFT) {
-        return player->pos->move_x( 0 );
+        return player->pos->move_x( 1 );
     }
     if (key == RIGHT){
-        return player->pos->move_x( 1 );
+        return player->pos->move_x( 0 );
     }
     return false;
 }
@@ -139,19 +160,14 @@ void Board::printBoard(){
     for(int i = 0; i < 4; i++){
         cout<<" |";
         for(int j = 0; j < 4; j++){
-            if(board[i][j] > 9){
-                cout<<" "<<board[i][j]<<" |";
-            }
-            else{
-                cout<<"  "<<board[i][j]<<" |";
-            }
+            cout<<" "<<board[i][j]<<" |";
         }
         cout<<"\n ---------------------\n";
     }
 }
 
 void Board::update(){
-    int cur_x = player->pos->getX(), cur_y = player->pos->getY();
+    char cur_x = player->pos->getX(), cur_y = player->pos->getY();
     board[cache[1]][cache[0]] = board[cur_y][cur_x];
     board[cur_y][cur_x] = player->getAvatar();
 }
@@ -159,12 +175,23 @@ int main(){
 
     Board board;
     board.printBoard();
+    board.movement();
+    board.update();
+    system("cls");
+    board.printBoard();
     
-    while(true){
+    while(!board.game_over()){
         if(board.movement()){
             system("cls");
             board.update();
             board.printBoard();
         }
     }
+    /*
+    if(!board.game_over()){
+        cout<<"No es el final del juego"<<endl;
+    }
+    else{
+        cout<<"Si es el final del juego"<<endl;
+    }*/
 }

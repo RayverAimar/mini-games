@@ -3,6 +3,9 @@
         "iostream": "cpp",
         "iosfwd": "cpp",
         "iterator": "cpp",
-        "xlocnum": "cpp"
-    }
+        "xlocnum": "cpp",
+        "xstring": "cpp",
+        "ostream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
