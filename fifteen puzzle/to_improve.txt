@@ -1,0 +1,10 @@
+There should be a function which frezees the program when waiting for an input (movement).
+If the input is a invalid one, then ask for new input instead of running the while again.
+So there would be no error when reaching to number of movements needed to "end the program"
+and putting a non-valid input would make the program show the message again.
+Steps to make the error appear:
+1. Do 500 movements
+2. Enter "y"
+3. Press any other key instead of "w a s d"
+
+The same message will appear even after put "y" LMAO
