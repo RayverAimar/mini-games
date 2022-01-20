@@ -21,6 +21,11 @@ Game::~Game(){
     delete m_player, m_board, m_computer;
 }
 
+
+void Game::updateBoard(char _avatar, int pos){
+    m_board[pos - 1] = _avatar; 
+}
+
 void Game::printBoard(){
     
     for(int i = 0; i < 9; i++){

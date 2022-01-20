@@ -18,6 +18,7 @@ public:
     void player_movement(); //Re - pensar la función que me permita a mi elegir mi casilla y al bot randomnear alguna
     void computer_movement();
     void run();
+    void updateBoard(char _avatar, int pos);
     void printBoard();
     bool game_over();
 
