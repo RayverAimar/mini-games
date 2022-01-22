@@ -33,7 +33,7 @@ void Game::computer_movement(){
     }
     int computer_move = m_computer->ask_for_movement(valid_movements, ++counter);
     m_board[valid_movements[computer_move]] = m_computer->getAvatar();
-    
+    set_PH_valid_position();
 }
 
 void Game::updateBoard(char _avatar, int pos){
@@ -63,20 +63,28 @@ bool Game::move_play_handler(){
         key = _getch();
     }
     if(key == RIGHT){
-        m_playhandler->move_pos(1);
+        m_playhandler->move_pos(1, m_board);
         cout<<"Presiono RIGHT"<<endl;
     }
     if(key == LEFT){
         cout<<"Presiono LEFT"<<endl;
-        m_playhandler->move_pos(-1);
+        m_playhandler->move_pos(-1, m_board);
     }
     if(key == 13){
         cout<<"Presiono enter"<<endl;
         m_player->shift_change();
+        m_board[m_playhandler->get_pos()] = m_player->getAvatar();
         return false;
     }
     return true;
 
+}
+
+void Game::set_PH_valid_position(){
+    m_playhandler->set_pos(0);
+    while(m_board[m_playhandler->get_pos()] != ' '){
+        m_playhandler->move_pos(1, m_board);
+    }
 }
 
 void Game::printBoard(char _PH_avatar){

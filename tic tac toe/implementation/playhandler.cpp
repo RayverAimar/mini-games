@@ -14,16 +14,17 @@ PlayHandler::~PlayHandler(){
 }
 
 
-bool PlayHandler::move_pos(int _to_move){
+void PlayHandler::move_pos(int _to_move, char* m_board){
+    bool valid_move = false;
     m_last_pos = m_pos;
-    int cache = m_pos;
-    m_pos += _to_move;
-    m_pos = m_pos % 9;
-    if(m_pos<0 || m_pos>8){
-        m_pos = cache;
-        return false;
-    }
-    return true;
+    do{
+        
+        m_pos += _to_move;
+        if(m_pos < 0 ){
+            m_pos = 8;
+        }
+        m_pos = m_pos % 9;
+    }while(m_board[m_pos] != ' ');
 }
 
 
@@ -41,4 +42,9 @@ bool PlayHandler::get_activity(){
 
 char PlayHandler::get_avatar(){
     return m_avatar;
+}
+
+void PlayHandler::set_pos(int _pos){
+    m_pos = _pos;
+    m_last_pos = _pos;
 }
