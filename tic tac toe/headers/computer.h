@@ -8,7 +8,7 @@ class Computer: public Player{
 public:
     Computer(char _avatar);
     ~Computer();
-    int ask_for_movement(int* valid_movements);
+    int ask_for_movement(int* valid_movements, int _size);
 };
 
 

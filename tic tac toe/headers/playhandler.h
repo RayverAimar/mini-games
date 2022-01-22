@@ -4,17 +4,18 @@
 
 class PlayHandler{
     char m_avatar;
-    int m_pos;
+    int m_pos, m_last_pos;
+    bool activity;
 public:
 
-    PlayHandler(int _pos);
+    PlayHandler(int _pos = 0);
     ~PlayHandler();
 
+    int get_last_pos();
     int get_pos();
+    bool get_activity();
     bool move_pos(int _to_move);
-    bool update_pos(int _to_move);
-    void browse(int* &m_board);
-    void printBoard(int* &m_board);
+    char get_avatar();
 };
 
 

@@ -7,7 +7,7 @@ class Player{
 
     int* m_movements, num_movements;
     char m_avatar;
-    bool turn;
+    bool m_turn;
 
 public:
 
@@ -19,6 +19,7 @@ public:
     void add_movement(int _movement);
     void increment_num_movements();
     void shift_change();
+    bool get_turn();
 };
 
 

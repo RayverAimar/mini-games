@@ -3,10 +3,11 @@
 Player::Player(char _avatar){
     m_movements = new int[5];
     m_avatar = _avatar;
-    turn = false;
+    m_turn = false;
+    num_movements = 0;
 }
 Player::~Player(){
-    delete m_movements, num_movements;
+    delete m_movements;
 }
 
 char Player::getAvatar(){
@@ -30,5 +31,9 @@ void Player::increment_num_movements(){
 }
 
 void Player::shift_change(){
-    turn = !turn;
+    m_turn = !m_turn;
+}
+
+bool Player::get_turn(){
+    return m_turn;
 }
