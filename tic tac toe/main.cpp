@@ -21,7 +21,7 @@ int main(){
     game.printBoard();
     game.m_player->shift_change();
     while(true){
-        system("cls");
+        //system("cls");
         game.printBoard();
         if(game.m_player->get_turn()){
             game.move_play_handler();

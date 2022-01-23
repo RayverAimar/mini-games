@@ -23,16 +23,34 @@ Game::~Game(){
 }
 
 void Game::computer_movement(){
-    int* valid_movements = new int[9];
-    int counter{0};
-    for(int i = 0; i < 9; i++){
+    int num_valid_movements{0}, counter{0};
+    for(int i = 0; i < 9; i++){ //First, take the number exact of valid movements
+        if(m_board[i] == ' '){
+            num_valid_movements++;
+        }
+    }
+    cout<<"Numero de movimientos validos\n";
+    cout<<num_valid_movements<<"\n";
+    int* valid_movements = new int[num_valid_movements];
+
+    for(int i = 0; i < 9; i++){ //Then take its positions
         if(m_board[i] == ' '){
             valid_movements[counter] = i;
             counter++;
         }
     }
-    int computer_move = m_computer->ask_for_movement(valid_movements, ++counter);
+
+    cout<<"Estos son las posiciones de los movimientos validos de computer\n";
+    for(int i = 0; i < num_valid_movements; i++){
+        cout<<valid_movements[i]<<" ";
+    }
+    cout<<"\n";
+    int computer_move = m_computer->ask_for_movement(num_valid_movements);
     m_board[valid_movements[computer_move]] = m_computer->getAvatar();
+    cout<<"Estos es la posicion de los movimientos validos escogida\n";
+    cout<<computer_move<<"\n";
+    cout<<"Estos es la posicion del tablero escogida\n";
+    cout<<valid_movements[computer_move]<<"\n";
     set_PH_valid_position();
 }
 

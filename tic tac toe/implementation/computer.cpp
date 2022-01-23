@@ -9,10 +9,10 @@ Computer::~Computer(){
 
 }
 
-int Computer::ask_for_movement(int* valid_movements, int _size){
+int Computer::ask_for_movement(int _size){
     srand ( unsigned ( time(0) ) );
     int _movement = rand() % _size;
-    add_movement(_movement);
+    add_movement(_movement); //Fix this
     increment_num_movements();
     return _movement;
 }
