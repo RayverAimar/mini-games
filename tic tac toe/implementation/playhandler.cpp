@@ -3,11 +3,10 @@
 
 using std::cout;
 
-PlayHandler::PlayHandler(int _pos){ //Se le puede pasar el tablero y decidir en que element aparecerá
+PlayHandler::PlayHandler(int _pos = 0){ //Se le puede pasar el tablero y decidir en que element aparecerá
     m_pos = _pos;
     m_last_pos = _pos;
     m_avatar = '#';
-    activity = true;
 }
 PlayHandler::~PlayHandler(){
 
@@ -34,10 +33,6 @@ int PlayHandler::get_pos(){
 
 int PlayHandler::get_last_pos(){
     return m_last_pos;
-}
-
-bool PlayHandler::get_activity(){
-    return activity;
 }
 
 char PlayHandler::get_avatar(){

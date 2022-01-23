@@ -1,27 +1,17 @@
 #include "headers/game.h"
 
-using std::cin;
-
 int main(){
-    char opt;
+    int opt;
     Game game;
     do{
-        cout<<"Do you want to take the first movement? (y/n): "<<endl;
-        cin >> opt;    
-    }while(opt != 'y' && opt != 'n');
-    
-    if(opt == 'y')
-        game.m_player->shift_change();
-    while(!game.game_over()){
-        system("cls");
-        game.printBoard();
-        if(game.m_player->get_turn()){
-            game.move_play_handler();
-        }
-        else{
-            game.computer_movement();
-            game.m_player->shift_change();
-        }
+        cout<<"1. Human vs PC mode\n2. Human vs Human mode\n";
+        cin>>opt;
+    }while(opt != 1 && opt != 2);
+    if(opt == 1){
+        game.PvsPC();
     }
-    game.results();
+    else{
+        game.PvsP();
+    }
+    
 }

@@ -11,16 +11,25 @@ class Player{
 
 public:
 
+    //Constructors & Destructor
     Player(char _avatar);
     ~Player();
+
+    //Getters
     char getAvatar();
-    void print_moves();
     int get_num_movements();
-    void add_movement(int _movement);
-    void shift_change();
     bool get_turn();
     bool find(int _board_position);
     bool won();
+
+    //Setters (NULL)
+    
+    //Auxiliar Functions
+    void print_moves();
+    void add_movement(int _movement);
+    void shift_change();
+    
+    
 };
 
 

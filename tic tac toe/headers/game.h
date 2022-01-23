@@ -8,7 +8,7 @@
 #include "../headers/playhandler.h"
 #include "../headers/computer.h"
 
-using std::cout; using std::endl;
+using std::cout; using std::endl; using std::cin;
 
 class Game{
     char* m_board;
@@ -34,6 +34,8 @@ public:
     void printBoard();
     void move_play_handler();
     void results();
+    void PvsPC();
+    void PvsP();
 
 };
 

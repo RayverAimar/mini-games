@@ -122,3 +122,30 @@ void Game::results(){
     cout<<"Positions taken by computer: ";
     m_computer->print_moves();
 }
+
+void Game::PvsPC(){
+    char opt;
+    do{
+        cout<<"Do you want to take the first movement? (y/n): "<<endl;
+        cin >> opt;    
+    }while(opt != 'y' && opt != 'n');
+    
+    if(opt == 'y')
+        m_player->shift_change();
+    while(!game_over()){
+        system("cls");
+        printBoard();
+        if(m_player->get_turn()){
+            move_play_handler();
+        }
+        else{
+            computer_movement();
+            m_player->shift_change();
+        }
+    }
+    results();
+}
+
+void Game::PvsP(){
+    cout << "Available Soon. . . \n";
+}
