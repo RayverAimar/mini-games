@@ -10,29 +10,31 @@
 
 using std::cout; using std::endl;
 
-
-
-
-
 class Game{
     char* m_board;
     int n_turn;
 public:
+
     Player *m_player;
     Computer *m_computer;
     PlayHandler *m_playhandler;
+
+    //Constructors & Destructor
     Game();
     ~Game();
-    void computer_movement();
-    void set_PH_valid_position(); 
-    void updateBoard(char _avatar, int pos); // ??
-    void printBoard();
+
+    //Getters
     bool game_over();
-    bool move_play_handler();
+
+    //Setters
+    void set_PH_valid_position(); 
+
+    //Auxiliar Functions
+    void computer_movement();
+    void printBoard();
+    void move_play_handler();
+    void results();
 
 };
-
-
-
 
 #endif

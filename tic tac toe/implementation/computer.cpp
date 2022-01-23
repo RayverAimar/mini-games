@@ -2,7 +2,6 @@
 #include <ctime>       /* time */
 #include "../headers/computer.h"
 
-
 Computer::Computer(char _avatar = 'O') : Player{ _avatar } { } 
 
 Computer::~Computer(){

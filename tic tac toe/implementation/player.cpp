@@ -23,16 +23,8 @@ int Player::get_num_movements(){
     return num_movements;
 }
 
-int* Player::get_m_movements(){
-    return m_movements;
-}
-
 void Player::add_movement(int _movement){
     m_movements[num_movements] = _movement;
-    num_movements++;
-}
-
-void Player::increment_num_movements(){
     num_movements++;
 }
 
@@ -45,9 +37,9 @@ bool Player::get_turn(){
 }
 void Player::print_moves(){
     for(int i = 0; i < num_movements; i++){
-        std::cout<<m_movements[i]<<" ";
+        std::cout << m_movements[i] << " ";
     }
-    std::cout<<std::endl;
+    std::cout << std::endl;
 }
 
 bool Player::find(int _board_position){
