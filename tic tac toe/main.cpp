@@ -18,7 +18,7 @@ int main(){
     //    key = _getch();
     //}
     Game game;
-    game.m_player->shift_change();
+    //game.m_player->shift_change();
     while(!game.game_over()){
         //system("cls");
         game.printBoard();
@@ -29,7 +29,6 @@ int main(){
             game.computer_movement();
             game.m_player->shift_change();
         }
-        //cout<<"\n"<<game.m_playhandler->get_pos()<<"\n";
     }
     game.printBoard();
 

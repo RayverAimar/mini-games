@@ -115,5 +115,8 @@ bool Game::game_over(){
     }
     system("cls");
     cout<<"Game has ended. All positions have been taken.\n";
+    if(m_player->get_turn()){
+        m_player->shift_change();
+    }
     return true;
 }
