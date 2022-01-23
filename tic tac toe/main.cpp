@@ -2,12 +2,6 @@
 
 using std::cin;
 
-constexpr auto UP = 119;
-constexpr auto DOWN = 115;
-constexpr auto RIGHT = 100;
-constexpr auto LEFT = 97;
-constexpr auto ESC = 27;
-
 int main(){
     char opt;
     Game game;
