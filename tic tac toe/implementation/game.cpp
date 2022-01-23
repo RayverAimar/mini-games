@@ -51,7 +51,10 @@ void Game::computer_movement(){
     cout<<computer_move<<"\n";
     cout<<"Estos es la posicion del tablero escogida\n";
     cout<<valid_movements[computer_move]<<"\n";
-    set_PH_valid_position();
+    if(num_valid_movements != 1){
+        set_PH_valid_position();    
+    }
+     // fix this when there is no valid position all positions already taken()
 }
 
 void Game::updateBoard(char _avatar, int pos){
@@ -77,21 +80,19 @@ void Game::printBoard(){
 bool Game::move_play_handler(){
     char key;
 
-    while(key != RIGHT && key != LEFT && key != 13){
+    while(key != RIGHT && key != LEFT && key != 13){ //Verifying that only RIGHT, LEFT or ENTER has been pressed
         key = _getch();
     }
     if(key == RIGHT){
         m_playhandler->move_pos(1, m_board);
-        cout<<"Presiono RIGHT"<<endl;
     }
     if(key == LEFT){
-        cout<<"Presiono LEFT"<<endl;
         m_playhandler->move_pos(-1, m_board);
     }
     if(key == 13){
-        cout<<"Presiono enter"<<endl;
         m_player->shift_change();
         m_board[m_playhandler->get_pos()] = m_player->getAvatar();
+        cout<<"\n"<< "m_board en la posicion "<<m_playhandler->get_pos()<<" -> "<< m_board[m_playhandler->get_pos()]<<"\n\n";
         return false;
     }
     return true;
@@ -99,23 +100,20 @@ bool Game::move_play_handler(){
 }
 
 void Game::set_PH_valid_position(){
-    m_playhandler->set_pos(0);
+    m_playhandler->set_pos(0); //This function causing some issues
     while(m_board[m_playhandler->get_pos()] != ' '){
         m_playhandler->move_pos(1, m_board);
     }
+    m_playhandler->set_last_pos(m_playhandler->get_pos());
 }
 
-void Game::printBoard(char _PH_avatar){
-    system("cls");
-    if(m_player->get_turn()){
-        m_board[m_playhandler->get_pos()] = m_playhandler->get_avatar();
-    }
+bool Game::game_over(){
     for(int i = 0; i < 9; i++){
-        if(!(i%3)){
-            cout<<"\n -------------\n";
-            cout<<" |";
+        if(m_board[i] == ' '){
+            return false;
         }
-        cout<<" "<<m_board[i]<<" |";
-    }    
-    cout<<"\n -------------\n\n";
+    }
+    system("cls");
+    cout<<"Game has ended. All positions have been taken.\n";
+    return true;
 }

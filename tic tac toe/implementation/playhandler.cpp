@@ -46,5 +46,8 @@ char PlayHandler::get_avatar(){
 
 void PlayHandler::set_pos(int _pos){
     m_pos = _pos;
-    m_last_pos = _pos;
+}
+
+void PlayHandler::set_last_pos(int _last_pos){
+    m_last_pos = _last_pos;
 }

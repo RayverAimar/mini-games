@@ -14,6 +14,7 @@ public:
     int get_last_pos();
     int get_pos();
     void set_pos(int _pos);
+    void set_last_pos(int _last_pos);
     bool get_activity();
     void move_pos(int _to_move, char* m_board);
     char get_avatar();

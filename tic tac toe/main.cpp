@@ -18,9 +18,8 @@ int main(){
     //    key = _getch();
     //}
     Game game;
-    game.printBoard();
     game.m_player->shift_change();
-    while(true){
+    while(!game.game_over()){
         //system("cls");
         game.printBoard();
         if(game.m_player->get_turn()){
@@ -32,6 +31,8 @@ int main(){
         }
         //cout<<"\n"<<game.m_playhandler->get_pos()<<"\n";
     }
+    game.printBoard();
+
 
 
 
