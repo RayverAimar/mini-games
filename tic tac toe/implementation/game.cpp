@@ -47,6 +47,7 @@ void Game::computer_movement(){
     cout<<"\n";
     int computer_move = m_computer->ask_for_movement(num_valid_movements);
     m_board[valid_movements[computer_move]] = m_computer->getAvatar();
+    m_computer->add_movement(valid_movements[computer_move]);
     cout<<"Estos es la posicion de los movimientos validos escogida\n";
     cout<<computer_move<<"\n";
     cout<<"Estos es la posicion del tablero escogida\n";
@@ -92,6 +93,7 @@ bool Game::move_play_handler(){
     if(key == 13){
         m_player->shift_change();
         m_board[m_playhandler->get_pos()] = m_player->getAvatar();
+        m_player->add_movement(m_playhandler->get_pos());
         cout<<"\n"<< "m_board en la posicion "<<m_playhandler->get_pos()<<" -> "<< m_board[m_playhandler->get_pos()]<<"\n\n";
         return false;
     }
@@ -108,13 +110,24 @@ void Game::set_PH_valid_position(){
 }
 
 bool Game::game_over(){
+
+    if(m_computer->won()){
+        cout<<"\nComputer made three in a row"<<endl;
+        m_player->shift_change();
+        return true;
+    }
+    if(m_player->won()){
+        cout<<"\nYou made three in a row!"<<endl;
+        return true;
+    }
+
     for(int i = 0; i < 9; i++){
         if(m_board[i] == ' '){
             return false;
         }
     }
     system("cls");
-    cout<<"Game has ended. All positions have been taken.\n";
+    cout<<"Draw! Game has ended. All positions have been taken.\n";
     if(m_player->get_turn()){
         m_player->shift_change();
     }

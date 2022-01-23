@@ -12,11 +12,6 @@ int* swap_array(int* m_movements){
 
 int main(){
     
-
-    //char key;
-    //while(key!= 13){
-    //    key = _getch();
-    //}
     Game game;
     //game.m_player->shift_change();
     while(!game.game_over()){
@@ -31,6 +26,10 @@ int main(){
         }
     }
     game.printBoard();
+    cout<<"Movimientos de player: ";
+    game.m_player->print_moves();
+    cout<<"Movimientos de computer: ";
+    game.m_computer->print_moves();
 
 
 

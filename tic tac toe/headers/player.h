@@ -14,12 +14,15 @@ public:
     Player(char _avatar);
     ~Player();
     char getAvatar();
+    void print_moves();
     int get_num_movements();
     int* get_m_movements();
     void add_movement(int _movement);
     void increment_num_movements();
     void shift_change();
     bool get_turn();
+    bool find(int _board_position);
+    bool won();
 };
 
 
